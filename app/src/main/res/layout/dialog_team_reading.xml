@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingStart="16dp"
+    android:id="@+id/dialog_team_reading_layout"
+    android:visibility="gone"
+    android:gravity="center"
+    android:paddingEnd="16dp"
+    android:layout_gravity="center"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/team_name_pregame"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text=""/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center"
+            android:layout_marginEnd="5dp"
+            android:text="Reading: "/>
+
+        <TextView
+            android:id="@+id/player_reading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:maxLines="1"
+            android:gravity="start|center"
+            android:text=""/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center"
+            android:layout_marginEnd="5dp"
+            android:text="Guessing: "/>
+
+        <TextView
+            android:id="@+id/player_guessing"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:maxLines="1"
+            android:gravity="start|center"
+            android:text=""/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center"
+            android:layout_marginEnd="5dp"
+            android:text="Team score: "/>
+
+        <TextView
+            android:id="@+id/team_score"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="start|center"
+            android:maxLines="1"
+            android:text=""/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="When you are ready, press start"/>
+
+
+   <Button
+       android:id="@+id/start_game_button"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:textColor="@color/white_color"
+       android:text="@string/start_txt"
+       android:background="@color/colorAccent"/>
+
+
+</LinearLayout>
