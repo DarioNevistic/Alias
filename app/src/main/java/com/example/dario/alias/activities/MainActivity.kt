@@ -22,4 +22,19 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+
+
 }
