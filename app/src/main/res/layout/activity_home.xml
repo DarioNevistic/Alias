@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/match"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="@dimen/margin_base"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/margin_base">
+
+        <ImageView
+            style="@style/wrap"
+            android:layout_centerVertical="true"
+            android:src="@drawable/header" />
+
+        <Button
+            android:id="@+id/home_settings_button"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackground"
+            android:drawableEnd="@drawable/ion_android_settings_ionicons" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/continue_game_layout_holder"
+        style="@style/heightWrap_widthMatch"
+        android:layout_above="@id/new_game_layout_holder"
+        android:layout_marginBottom="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingEnd="@dimen/margin_base"
+        android:paddingStart="@dimen/margin_base"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <TextView
+            style="@style/wrap"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/avenir_bold"
+            android:text="@string/continue_game_text"
+            android:textAlignment="center"
+            android:textColor="@color/black_in_game"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/last_game_textview"
+            style="@style/wrap"
+            android:fontFamily="@font/avenir_medium"
+            android:text="@string/last_game_time_info"
+            android:textAlignment="center"
+            android:textColor="@color/grey_c9cad2"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_border_grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_game_layout_holder"
+        style="@style/heightWrap_widthMatch"
+        android:paddingEnd="@dimen/margin_base"
+        android:paddingStart="@dimen/margin_base"
+        android:layout_above="@id/rules_layout_holder"
+        android:layout_marginBottom="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <TextView
+            style="@style/wrap"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/avenir_bold"
+            android:text="@string/new_game_text"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
+
+        <TextView
+            style="@style/wrap"
+            android:fontFamily="@font/avenir_medium"
+            android:text="@string/new_game_info_text"
+            android:textAlignment="center"
+            android:textColor="@color/grey_c9cad2"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_border_grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rules_layout_holder"
+        style="@style/heightWrap_widthMatch"
+        android:layout_alignParentBottom="true"
+        android:paddingEnd="@dimen/margin_base"
+        android:paddingStart="@dimen/margin_base"
+        android:layout_marginBottom="80dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <TextView
+            style="@style/wrap"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/avenir_bold"
+            android:text="@string/rules_text"
+            android:textAlignment="center"
+            android:textColor="@color/black_in_game"
+            android:textSize="20sp" />
+
+        <TextView
+            style="@style/wrap"
+            android:fontFamily="@font/avenir_medium"
+            android:text="@string/rules_info_text"
+            android:textAlignment="center"
+            android:textColor="@color/grey_c9cad2"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_border_grey"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

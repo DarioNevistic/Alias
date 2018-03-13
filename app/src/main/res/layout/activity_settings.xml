@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/margin_base"
+            android:layout_marginStart="@dimen/margin_base"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:drawableStart="@drawable/ion_android_arrow_back_ionicons"
+                android:src="@drawable/ion_android_arrow_back_ionicons" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/wrap"
+            android:layout_marginStart="@dimen/margin_base"
+            android:fontFamily="@font/avenir_bold"
+            android:text="@string/settings"
+            android:textColor="#313131"
+            android:textSize="30sp" />
+
+
+        <LinearLayout
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/points"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/settings_points_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/points"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/settings_points_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/number_of_points_value"
+                    style="@style/wrap"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/avenir_bold"
+                    android:gravity="center"
+                    android:text="@string/points_for_victory"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/points_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="160"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:progressTint="@color/black_in_game"
+                android:thumbTint="@color/black_in_game" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bottom_border_grey" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/number_of_words_id"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/words_number_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/number_of_words_id"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/words_number_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/number_of_words_value"
+                    style="@style/wrap"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/avenir_bold"
+                    android:gravity="center"
+                    android:text="@string/words_number_counter"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/number_of_words_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:progressTint="@color/black_in_game"
+                android:thumbTint="@color/black_in_game" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bottom_border_grey" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/rounds"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/rounds_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/rounds"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/rounds_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/number_of_rounds_value"
+                    style="@style/wrap"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/avenir_bold"
+                    android:gravity="center"
+                    android:text="@string/rounds_number"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/number_of_rounds_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:progressTint="@color/black_in_game"
+                android:thumbTint="@color/black_in_game" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bottom_border_grey" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/round_time"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/round_time_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/round_time"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/round_time_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/round_time_value"
+                    style="@style/wrap"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/avenir_bold"
+                    android:gravity="center"
+                    android:text="@string/points_for_victory"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/round_time_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:progressTint="@color/black_in_game"
+                android:thumbTint="@color/black_in_game" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bottom_border_grey" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/missed_word_text"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/missed_word_penalty_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/missed_word_text"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/missed_word_penalty_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/missed_word_switch"
+                    style="@style/wrap"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bottom_border_grey" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/common_final_word"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/common_final_word_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/common_final_word"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/common_final_word_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/common_final_word_switch"
+                    style="@style/wrap"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bottom_border_grey" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/final_word_layout_holder"
+            style="@style/heightWrap_widthMatch"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/final_word"
+                    style="@style/wrap"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/avenir_bold"
+                    android:text="@string/final_word_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/wrap"
+                    android:layout_below="@id/final_word"
+                    android:fontFamily="@font/avenir_medium"
+                    android:text="@string/final_word_info_text"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_c9cad2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/final_word_value"
+                    style="@style/wrap"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/avenir_bold"
+                    android:gravity="center"
+                    android:text="@string/points_for_victory"
+                    android:textAlignment="center"
+                    android:textColor="@color/black_in_game"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/final_word_points_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:progressTint="@color/black_in_game"
+                android:thumbTint="@color/black_in_game" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
