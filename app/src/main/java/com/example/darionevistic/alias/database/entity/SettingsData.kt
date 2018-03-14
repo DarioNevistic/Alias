@@ -2,7 +2,6 @@ package com.example.darionevistic.alias.database.entity
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 
 /**
@@ -14,10 +13,6 @@ data class SettingsData(
         var id: Long = 0,
         @ColumnInfo(name = "points_for_victory")
         var pointsForVictory: Int = 100,
-        @ColumnInfo(name = "number_of_words")
-        var numberOfWords: Int = 0,
-        @ColumnInfo(name = "total_rounds")
-        var totalRounds: Int = 0,
         @ColumnInfo(name = "round_time")
         var roundTime: Int = 0,
         @ColumnInfo(name = "final_word_points_worth")
@@ -27,5 +22,6 @@ data class SettingsData(
         @ColumnInfo(name = "common_final_word")
         var commonFinalWord: Boolean = false
 ) {
-    constructor() : this(0, 100, 0, 0, 0, 0, false, false)
+        constructor(): this(0, 100, 60, 0, false, false)
+
 }

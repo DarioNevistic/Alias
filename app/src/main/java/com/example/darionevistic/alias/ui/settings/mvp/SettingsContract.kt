@@ -18,10 +18,6 @@ interface SettingsContract {
 
         fun showPointsForVictortValue(value: String)
 
-        fun showNumberOfWordsPerRoundValue(value: String)
-
-        fun showTotalRoundsValue(value: String)
-
         fun showRoundTimeValue(value: String)
 
         fun showFinalWordWorthValue(value: String)
@@ -30,14 +26,12 @@ interface SettingsContract {
 
         fun setMessage(message: String)
 
-        fun observePointsForVictory()
-
         fun getSettings(): SettingsData
 
-//        fun observeNumberOfWordsPerRound()
-//
-//        fun observeTotalRounds()
-//
+        fun setSettings(settingsData: SettingsData)
+
+        fun observePointsForVictory(): InitialValueObservable<Int>
+
 //        fun observeRoundTimeInSeconds()
 //
 //        fun observeMissedWordPenalty()
@@ -53,10 +47,10 @@ interface SettingsContract {
 
         fun saveSettings(settingsData: SettingsData)
 
-        //        fun onNumberOfWordsPerRoundChange()
-//
-//        fun onRoundsTotalChange()
-//
+        fun onPointsForVictoryChange(): Disposable
+
+        fun loadSettingsFromDB(): Disposable
+
 //        fun onRoundTimeSecondsPerRoundChange()
 //
 //        fun onMissedWordPenaltyChange()

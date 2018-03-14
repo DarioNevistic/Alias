@@ -49,11 +49,12 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
     }
 
     override fun onInsertSettings(settingsData: SettingsData) {
-        Observable.just(settingsData)
+        compositeDisposable.add(Observable.just(settingsData)
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe({ settingsDao.insertSettings(it) }
-                        , { throwable -> Timber.d(throwable.localizedMessage) })
+                        , { throwable -> Timber.d(throwable.localizedMessage) }))
+
     }
 
     override fun getAllSettings(): Disposable {

@@ -22,7 +22,9 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
 
     override fun onViewCreated() {
 
-        compositeDisposable.add(onBackPressed())
+        compositeDisposable.addAll(onBackPressed(),
+                onPointsForVictoryChange(),
+                loadSettingsFromDB())
     }
 
     override fun onBackPressed(): Disposable {
@@ -38,10 +40,29 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
     }
 
     override fun saveSettings(settingsData: SettingsData) {
-        Observable.just(settingsData)
+        compositeDisposable.add(Observable.just(settingsData)
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe({ settingsDao.insertSettings(it) }
-                        , { error -> Timber.d(error.localizedMessage) })
+                        , { error -> Timber.d(error.localizedMessage) }))
+
     }
+
+    override fun onPointsForVictoryChange(): Disposable {
+        return view.observePointsForVictory()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    progress -> view.showPointsForVictortValue((15 + progress * 5).toString())
+                }, { error -> System.out.println("Error receiving seek bar progress" + error) })
+    }
+
+    override fun loadSettingsFromDB(): Disposable {
+        return settingsDao.getAllSettings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    view.setSettings(it.first())
+                }, { error -> System.out.println("Error reading from DB" + error) })
+    }
+
 }

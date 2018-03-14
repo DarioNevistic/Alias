@@ -2,6 +2,7 @@ package com.example.darionevistic.alias.ui.settings
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.SeekBar
 import android.widget.Toast
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.app.AliasApplication
@@ -19,6 +20,7 @@ import com.jakewharton.rxbinding2.widget.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 
@@ -29,9 +31,6 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
 
     @Inject
     lateinit var presenter: SettingsPresenter
-
-    var disposables: CompositeDisposable = CompositeDisposable()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -44,70 +43,25 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+        loadSeekBars()
+
         presenter.onViewCreated()
-
-        observePointsForVictory()
     }
 
-    override fun observePointsForVictory() {
-        var isSeeking = false
-        val MIN = 15
-        val MAX = 160
-        val STEP = 5
-        var progressCustom = 17
-        points_seek_bar!!.max = (MAX - MIN) / STEP
-
-        // progressCustom = MIN + (progress * STEP)
-
-        points_seek_bar.progress = progressCustom
-
-        val sharedSeekBarEvents = RxSeekBar.changeEvents(points_seek_bar)
-                .ofType(SeekBarChangeEvent::class.java)
-                .observeOn(AndroidSchedulers.mainThread()).share()
-
-        disposables.add(sharedSeekBarEvents
-                .subscribe {
-                    if (it is SeekBarStartChangeEvent) {
-                        isSeeking = true
-                    } else if (it is SeekBarStopChangeEvent) {
-                        isSeeking = false
-                    }
-                })
-
-        disposables.add(sharedSeekBarEvents
-                .ofType(SeekBarProgressChangeEvent::class.java)
-                .filter({ it.fromUser() })
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { showPointsForVictortValue((MIN + (it.progress() * STEP)).toString()) }
-                .debounce(1000, TimeUnit.MILLISECONDS)
-                .subscribe({
-                    if (!isSeeking) {
-
-                    }
-                }, { error -> System.out.println("Error receiving seek bar progress" + error) }))
-    }
-
+    override fun observePointsForVictory(): InitialValueObservable<Int> = RxSeekBar.userChanges(points_seek_bar)
 
     override fun observeBackBtn(): Observable<Any> = RxView.clicks(back_button)
 
-    override fun goBackOnPreviousActivity() {
-        finish()
-    }
+    override fun goBackOnPreviousActivity() = finish()
 
     override fun setMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    private fun getProgress(progress: Int, min: Int): Int = (progress - min) / 5
+
     override fun showPointsForVictortValue(value: String) {
         number_of_points_value.text = value
-    }
-
-    override fun showNumberOfWordsPerRoundValue(value: String) {
-        number_of_words_value.text = value
-    }
-
-    override fun showTotalRoundsValue(value: String) {
-        number_of_rounds_value.text = value
     }
 
     override fun showRoundTimeValue(value: String) {
@@ -132,8 +86,6 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
     override fun getSettings(): SettingsData {
         return SettingsData(0,
                 Integer.parseInt(number_of_points_value.text.toString()),
-                Integer.parseInt(number_of_words_value.text.toString()),
-                Integer.parseInt(number_of_rounds_value.text.toString()),
                 Integer.parseInt(round_time_value.text.toString()),
                 Integer.parseInt(final_word_value.text.toString()),
                 missed_word_switch.isChecked,
@@ -141,8 +93,33 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
         )
     }
 
+    private fun loadSeekBars() {
+        points_seek_bar!!.max = (160 - 15) / 5
+        round_time_seek_bar!!.max = (160 - 15) / 5
+        final_word_points_seek_bar!!.max = (160 - 15) / 5
+    }
+
+    override fun setSettings(settingsData: SettingsData) {
+        points_seek_bar.progress = getProgress(settingsData.pointsForVictory, 15)
+        showPointsForVictortValue(settingsData.pointsForVictory.toString())
+        round_time_seek_bar.progress = getProgress(settingsData.roundTime, 15)
+        showRoundTimeValue(settingsData.roundTime.toString())
+        final_word_points_seek_bar.progress = getProgress(settingsData.finalWordPointsWord, 15)
+        showFinalWordWorthValue(settingsData.finalWordPointsWord.toString())
+        missed_word_switch.isChecked = settingsData.missedWordPenalty
+        common_final_word_switch.isChecked = settingsData.commonFinalWord
+
+        changeFinalWordSettings(common_final_word_switch.isChecked)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.onViewDestroyed()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        presenter.saveSettings(getSettings())
+        goBackOnPreviousActivity()
     }
 }
