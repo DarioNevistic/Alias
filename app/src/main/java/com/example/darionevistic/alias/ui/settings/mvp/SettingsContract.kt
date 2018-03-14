@@ -16,7 +16,7 @@ interface SettingsContract {
 
         fun changeFinalWordSettings(state: Boolean)
 
-        fun showPointsForVictortValue(value: String)
+        fun showPointsForVictoryValue(value: String)
 
         fun showRoundTimeValue(value: String)
 
@@ -32,9 +32,7 @@ interface SettingsContract {
 
         fun observePointsForVictory(): InitialValueObservable<Int>
 
-//        fun observeRoundTimeInSeconds()
-//
-//        fun observeMissedWordPenalty()
+        fun observeRoundTimeInSeconds(): InitialValueObservable<Int>
 //
 //        fun observeCommonFinalWord()
 //
@@ -49,16 +47,14 @@ interface SettingsContract {
 
         fun onPointsForVictoryChange(): Disposable
 
+        fun onRoundTimeSecondsPerRoundChange(): Disposable
+
+//        fun onCommonFinalWordChange()
+
+//        fun onFinalWordPointsWorthChange()
+
         fun loadSettingsFromDB(): Disposable
 
-//        fun onRoundTimeSecondsPerRoundChange()
-//
-//        fun onMissedWordPenaltyChange()
-//
-//        fun onCommonFinalWordChange()
-//
-//        fun onFinalWordPointsWorthChange()
-//
         fun onBackPressed(): Disposable
     }
 }

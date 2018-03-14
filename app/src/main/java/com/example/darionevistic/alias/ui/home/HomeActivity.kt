@@ -77,8 +77,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     override fun loadSettings() {
-            homePresenter.getAllSettings()
-            System.out.println("LOAD SETTINGS ")
+        homePresenter.getAllSettings()
     }
 
     fun observeContinueGameBtn(): Observable<Any> = RxView.clicks(continue_game_layout_holder)

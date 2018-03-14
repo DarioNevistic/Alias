@@ -2,11 +2,11 @@ package com.example.darionevistic.alias.ui.settings
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.SeekBar
 import android.widget.Toast
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.app.AliasApplication
 import com.example.darionevistic.alias.database.entity.SettingsData
+import com.example.darionevistic.alias.ext.Constants
 import com.example.darionevistic.alias.ui.settings.di.DaggerSettingsComponent
 import com.example.darionevistic.alias.ui.settings.di.SettingsComponent
 import com.example.darionevistic.alias.ui.settings.di.SettingsModule
@@ -18,10 +18,6 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import javax.inject.Inject
 import com.jakewharton.rxbinding2.widget.*
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -50,6 +46,8 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
 
     override fun observePointsForVictory(): InitialValueObservable<Int> = RxSeekBar.userChanges(points_seek_bar)
 
+    override fun observeRoundTimeInSeconds(): InitialValueObservable<Int> = RxSeekBar.userChanges(round_time_seek_bar)
+
     override fun observeBackBtn(): Observable<Any> = RxView.clicks(back_button)
 
     override fun goBackOnPreviousActivity() = finish()
@@ -58,9 +56,9 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun getProgress(progress: Int, min: Int): Int = (progress - min) / 5
+    private fun getProgress(progress: Int, min: Int): Int = (progress - min) / Constants.SEEKBAR_STEP_SIZE
 
-    override fun showPointsForVictortValue(value: String) {
+    override fun showPointsForVictoryValue(value: String) {
         number_of_points_value.text = value
     }
 
@@ -94,15 +92,15 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
     }
 
     private fun loadSeekBars() {
-        points_seek_bar!!.max = (160 - 15) / 5
-        round_time_seek_bar!!.max = (160 - 15) / 5
+        points_seek_bar!!.max = (Constants.POINTS_FOR_VICTORY_MAX - Constants.POINTS_FOR_VICTORY_MIN) / Constants.SEEKBAR_STEP_SIZE
+        round_time_seek_bar!!.max = (Constants.ROUND_TIME_MAX - Constants.ROUND_TIME_MIN) / Constants.SEEKBAR_STEP_SIZE
         final_word_points_seek_bar!!.max = (160 - 15) / 5
     }
 
     override fun setSettings(settingsData: SettingsData) {
-        points_seek_bar.progress = getProgress(settingsData.pointsForVictory, 15)
-        showPointsForVictortValue(settingsData.pointsForVictory.toString())
-        round_time_seek_bar.progress = getProgress(settingsData.roundTime, 15)
+        points_seek_bar.progress = getProgress(settingsData.pointsForVictory, Constants.POINTS_FOR_VICTORY_MIN)
+        showPointsForVictoryValue(settingsData.pointsForVictory.toString())
+        round_time_seek_bar.progress = getProgress(settingsData.roundTime, Constants.ROUND_TIME_MIN)
         showRoundTimeValue(settingsData.roundTime.toString())
         final_word_points_seek_bar.progress = getProgress(settingsData.finalWordPointsWord, 15)
         showFinalWordWorthValue(settingsData.finalWordPointsWord.toString())

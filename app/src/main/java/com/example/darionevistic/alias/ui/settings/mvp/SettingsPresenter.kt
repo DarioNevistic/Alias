@@ -3,6 +3,7 @@ package com.example.darionevistic.alias.ui.settings.mvp
 import com.example.darionevistic.alias.base.BasePresenter
 import com.example.darionevistic.alias.database.dao.SettingsDao
 import com.example.darionevistic.alias.database.entity.SettingsData
+import com.example.darionevistic.alias.ext.Constants
 import com.example.darionevistic.alias.ui.settings.SettingsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,6 +25,7 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
 
         compositeDisposable.addAll(onBackPressed(),
                 onPointsForVictoryChange(),
+                onRoundTimeSecondsPerRoundChange(),
                 loadSettingsFromDB())
     }
 
@@ -51,9 +53,17 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
     override fun onPointsForVictoryChange(): Disposable {
         return view.observePointsForVictory()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    progress -> view.showPointsForVictortValue((15 + progress * 5).toString())
-                }, { error -> System.out.println("Error receiving seek bar progress" + error) })
+                .subscribe({ progress ->
+                    view.showPointsForVictoryValue((Constants.POINTS_FOR_VICTORY_MIN + progress * Constants.SEEKBAR_STEP_SIZE).toString())
+                }, { error -> Timber.d(error.localizedMessage) })
+    }
+
+    override fun onRoundTimeSecondsPerRoundChange(): Disposable {
+        return view.observeRoundTimeInSeconds()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ progress ->
+                    view.showRoundTimeValue((Constants.ROUND_TIME_MIN + progress * Constants.SEEKBAR_STEP_SIZE).toString())
+                }, { error -> Timber.d(error.localizedMessage) })
     }
 
     override fun loadSettingsFromDB(): Disposable {
@@ -62,7 +72,7 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     view.setSettings(it.first())
-                }, { error -> System.out.println("Error reading from DB" + error) })
+                }, { error -> Timber.d(error.localizedMessage) })
     }
 
 }
