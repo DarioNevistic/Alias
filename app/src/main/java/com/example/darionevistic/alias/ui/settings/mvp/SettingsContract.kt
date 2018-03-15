@@ -34,7 +34,7 @@ interface SettingsContract {
 
         fun observeRoundTimeInSeconds(): InitialValueObservable<Int>
 //
-//        fun observeCommonFinalWord()
+        fun observeCommonFinalWord(): InitialValueObservable<Boolean>
 //
 //        fun observeFinalWordPointsWorth()
 
@@ -49,7 +49,7 @@ interface SettingsContract {
 
         fun onRoundTimeSecondsPerRoundChange(): Disposable
 
-//        fun onCommonFinalWordChange()
+        fun onCommonFinalWordChange(): Disposable
 
 //        fun onFinalWordPointsWorthChange()
 

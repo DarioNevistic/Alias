@@ -42,11 +42,14 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
         loadSeekBars()
 
         presenter.onViewCreated()
+
     }
 
     override fun observePointsForVictory(): InitialValueObservable<Int> = RxSeekBar.userChanges(points_seek_bar)
 
     override fun observeRoundTimeInSeconds(): InitialValueObservable<Int> = RxSeekBar.userChanges(round_time_seek_bar)
+
+    override fun observeCommonFinalWord(): InitialValueObservable<Boolean> = RxCompoundButton.checkedChanges(common_final_word_switch)
 
     override fun observeBackBtn(): Observable<Any> = RxView.clicks(back_button)
 
@@ -73,11 +76,13 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
     override fun changeFinalWordSettings(state: Boolean) {
         if (state) {
             final_word_layout_holder.isEnabled = true
+            final_word_points_seek_bar.isEnabled = true
             final_word_layout_holder.alpha = 1.0f
 
         } else {
             final_word_layout_holder.isEnabled = false
             final_word_layout_holder.alpha = 0.2f
+            final_word_points_seek_bar.isEnabled = false
         }
     }
 
@@ -94,7 +99,7 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
     private fun loadSeekBars() {
         points_seek_bar!!.max = (Constants.POINTS_FOR_VICTORY_MAX - Constants.POINTS_FOR_VICTORY_MIN) / Constants.SEEKBAR_STEP_SIZE
         round_time_seek_bar!!.max = (Constants.ROUND_TIME_MAX - Constants.ROUND_TIME_MIN) / Constants.SEEKBAR_STEP_SIZE
-        final_word_points_seek_bar!!.max = (160 - 15) / 5
+        final_word_points_seek_bar!!.max = (Constants.POINTS_FOR_VICTORY_MAX - Constants.POINTS_FOR_VICTORY_MIN) / Constants.SEEKBAR_STEP_SIZE
     }
 
     override fun setSettings(settingsData: SettingsData) {
@@ -102,12 +107,13 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
         showPointsForVictoryValue(settingsData.pointsForVictory.toString())
         round_time_seek_bar.progress = getProgress(settingsData.roundTime, Constants.ROUND_TIME_MIN)
         showRoundTimeValue(settingsData.roundTime.toString())
-        final_word_points_seek_bar.progress = getProgress(settingsData.finalWordPointsWord, 15)
+        final_word_points_seek_bar.progress = getProgress(settingsData.finalWordPointsWord, Constants.POINTS_FOR_VICTORY_MIN)
         showFinalWordWorthValue(settingsData.finalWordPointsWord.toString())
         missed_word_switch.isChecked = settingsData.missedWordPenalty
         common_final_word_switch.isChecked = settingsData.commonFinalWord
 
-        changeFinalWordSettings(common_final_word_switch.isChecked)
+        changeFinalWordSettings(settingsData.commonFinalWord)
+
     }
 
     override fun onDestroy() {

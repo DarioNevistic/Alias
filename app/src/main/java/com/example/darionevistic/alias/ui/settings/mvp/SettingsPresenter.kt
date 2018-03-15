@@ -26,7 +26,8 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
         compositeDisposable.addAll(onBackPressed(),
                 onPointsForVictoryChange(),
                 onRoundTimeSecondsPerRoundChange(),
-                loadSettingsFromDB())
+                loadSettingsFromDB(),
+                onCommonFinalWordChange())
     }
 
     override fun onBackPressed(): Disposable {
@@ -56,6 +57,13 @@ class SettingsPresenter @Inject constructor(private val settingsDao: SettingsDao
                 .subscribe({ progress ->
                     view.showPointsForVictoryValue((Constants.POINTS_FOR_VICTORY_MIN + progress * Constants.SEEKBAR_STEP_SIZE).toString())
                 }, { error -> Timber.d(error.localizedMessage) })
+    }
+
+    override fun onCommonFinalWordChange(): Disposable {
+        return view.observeCommonFinalWord()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ s -> view.changeFinalWordSettings(s) }
+                        , { error -> Timber.d(error.localizedMessage) })
     }
 
     override fun onRoundTimeSecondsPerRoundChange(): Disposable {
