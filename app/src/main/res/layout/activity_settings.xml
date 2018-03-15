@@ -11,15 +11,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/margin_base"
-            android:layout_marginStart="@dimen/margin_base"
             android:layout_marginTop="15dp">
 
             <Button
                 android:id="@+id/back_button"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackground"
+                android:paddingStart="@dimen/margin_base"
+                android:paddingEnd="@dimen/margin_base"
                 android:drawableStart="@drawable/ion_android_arrow_back_ionicons"
                 android:src="@drawable/ion_android_arrow_back_ionicons" />
         </RelativeLayout>

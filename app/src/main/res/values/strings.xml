@@ -26,4 +26,7 @@
     <string name="common_final_word_info_text">All teams guess the final word</string>
     <string name="final_word_text">Final Word</string>
     <string name="final_word_info_text">Points worth</string>
+    <string name="teams_names_title">Name the teams</string>
+    <string name="play_word">Play</string>
+    <string name="plus_sign">+</string>
 </resources>

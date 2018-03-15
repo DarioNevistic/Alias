@@ -4,11 +4,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:layout_marginEnd="@dimen/margin_base"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="@dimen/margin_base">
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/margin_base"
+        android:layout_marginTop="15dp">
 
         <ImageView
             style="@style/wrap"
@@ -17,25 +16,27 @@
 
         <Button
             android:id="@+id/home_settings_button"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:background="?attr/selectableItemBackground"
-            android:drawableEnd="@drawable/ion_android_settings_ionicons" />
+            android:drawableEnd="@drawable/ion_android_settings_ionicons"
+            android:paddingEnd="@dimen/margin_base"
+            android:paddingStart="@dimen/margin_base" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/continue_game_layout_holder"
         style="@style/heightWrap_widthMatch"
         android:layout_above="@id/new_game_layout_holder"
-        android:layout_marginBottom="20dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
         android:paddingEnd="@dimen/margin_base"
         android:paddingStart="@dimen/margin_base"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:paddingTop="10dp">
 
         <TextView
             style="@style/wrap"
@@ -58,23 +59,23 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="20dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/bottom_border_grey"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bottom_border_grey" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/new_game_layout_holder"
         style="@style/heightWrap_widthMatch"
-        android:paddingEnd="@dimen/margin_base"
-        android:paddingStart="@dimen/margin_base"
         android:layout_above="@id/rules_layout_holder"
-        android:layout_marginBottom="20dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        android:paddingEnd="@dimen/margin_base"
+        android:paddingStart="@dimen/margin_base"
+        android:paddingTop="10dp">
 
         <TextView
             style="@style/wrap"
@@ -96,23 +97,24 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="20dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/bottom_border_grey"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bottom_border_grey" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/rules_layout_holder"
         style="@style/heightWrap_widthMatch"
         android:layout_alignParentBottom="true"
-        android:paddingEnd="@dimen/margin_base"
-        android:paddingStart="@dimen/margin_base"
         android:layout_marginBottom="80dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        android:paddingEnd="@dimen/margin_base"
+        android:paddingStart="@dimen/margin_base"
+        android:paddingTop="10dp">
 
         <TextView
             style="@style/wrap"
@@ -134,9 +136,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="20dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/bottom_border_grey"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bottom_border_grey" />
 
     </LinearLayout>
 
