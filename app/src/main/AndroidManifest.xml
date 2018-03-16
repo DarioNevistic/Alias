@@ -20,6 +20,7 @@
         <activity android:name=".ui.rules.RulesActivity" />
         <activity android:name=".ui.main_game.MainGameActivity" />
         <activity android:name=".ui.settings.SettingsActivity" />
+        <activity android:name=".ui.teams.TeamsActivity" />
     </application>
 
 </manifest>

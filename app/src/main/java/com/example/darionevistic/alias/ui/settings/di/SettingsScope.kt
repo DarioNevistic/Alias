@@ -5,7 +5,6 @@ import javax.inject.Scope
 /**
  * Created by dario.nevistic on 08/03/2018.
  */
-@MustBeDocumented
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class SettingsScope

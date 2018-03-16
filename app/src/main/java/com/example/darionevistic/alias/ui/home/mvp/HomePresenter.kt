@@ -27,10 +27,6 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
                 .doOnNext { view.setMessage("Continue") }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe())
-        compositeDisposable.add(view.observeNewGameBtn()
-                .doOnNext { view.setMessage("New Game") }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe())
         compositeDisposable.add(view.observeRulesGameBtn()
                 .doOnNext { view.setMessage("Rules") }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -40,7 +36,8 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe())
 
-        compositeDisposable.add(getAllSettings())
+        compositeDisposable.addAll(getAllSettings(),
+                onNewGamePressed())
 
     }
 
@@ -66,6 +63,13 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
                         onInsertSettings(SettingsData())
                     }
                 }, { throwable -> Timber.d(throwable.localizedMessage) })
+    }
+
+    override fun onNewGamePressed(): Disposable {
+        return view.observeNewGameBtn()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ view.openNewGameActivity() },
+                        { error -> Timber.d(error.localizedMessage) })
     }
 
 }

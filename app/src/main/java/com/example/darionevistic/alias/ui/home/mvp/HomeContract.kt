@@ -35,5 +35,7 @@ interface HomeContract {
 
         fun getAllSettings(): Disposable
 
+        fun onNewGamePressed(): Disposable
+
     }
 }

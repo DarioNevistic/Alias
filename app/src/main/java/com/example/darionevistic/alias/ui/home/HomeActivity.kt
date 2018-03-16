@@ -15,6 +15,7 @@ import com.example.darionevistic.alias.ui.home.mvp.HomePresenter
 import com.example.darionevistic.alias.ui.main_game.MainGameActivity
 import com.example.darionevistic.alias.ui.rules.RulesActivity
 import com.example.darionevistic.alias.ui.settings.SettingsActivity
+import com.example.darionevistic.alias.ui.teams.TeamsActivity
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_home.*
@@ -65,7 +66,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     override fun openNewGameActivity() {
-        startActivity(Intent(this@HomeActivity, MainGameActivity::class.java))
+        startActivity(Intent(this@HomeActivity, TeamsActivity::class.java))
     }
 
     override fun openRulesActivity() {

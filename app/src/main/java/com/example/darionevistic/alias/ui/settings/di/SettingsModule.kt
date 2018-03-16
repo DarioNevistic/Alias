@@ -19,7 +19,7 @@ class SettingsModule(private val activity: SettingsActivity) {
 
     @Provides
     @SettingsScope
-    fun providePresenter(settingsDao: SettingsDao, activity: SettingsActivity) = SettingsPresenter(settingsDao, activity)
+    fun providePresenter(settingsDao: SettingsDao) = SettingsPresenter(settingsDao, activity)
 
     @Provides
     @SettingsScope
