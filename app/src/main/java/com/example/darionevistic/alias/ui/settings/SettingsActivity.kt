@@ -29,20 +29,23 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
     lateinit var presenter: SettingsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        val component: SettingsComponent = DaggerSettingsComponent.builder()
-                .appComponent(AliasApplication[this].component())
-                .settingsModule(SettingsModule(this)).build()
-
-        component.inject(this)
-
         super.onCreate(savedInstanceState)
+
+        initDagger()
+
         setContentView(R.layout.activity_settings)
 
         loadSeekBars()
 
         presenter.onViewCreated()
 
+    }
+
+    private fun initDagger() {
+        DaggerSettingsComponent.builder()
+                .appComponent(AliasApplication.get(this).component())
+                .settingsModule(SettingsModule(this)).build()
+                .inject(this)
     }
 
     override fun observePointsForVictory(): InitialValueObservable<Int> = RxSeekBar.userChanges(points_seek_bar)

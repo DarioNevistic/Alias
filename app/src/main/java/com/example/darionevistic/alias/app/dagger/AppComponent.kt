@@ -3,7 +3,7 @@ package com.example.darionevistic.alias.app.dagger
 import com.example.darionevistic.alias.app.AliasApplication
 import com.example.darionevistic.alias.database.AppDatabase
 import com.example.darionevistic.alias.database.dao.SettingsDao
-import com.example.darionevistic.alias.ui.SplashActivity
+import com.example.darionevistic.alias.database.dao.TeamDao
 import dagger.Component
 
 /**
@@ -15,7 +15,9 @@ interface AppComponent {
 
     fun provideAppDatabase(): AppDatabase
 
-    fun provideQuestionDao(): SettingsDao
+    fun provideSettingsDao(): SettingsDao
+
+    fun provideTeamDao(): TeamDao
 
     fun inject(app: AliasApplication)
 }

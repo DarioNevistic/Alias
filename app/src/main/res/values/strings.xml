@@ -29,4 +29,6 @@
     <string name="teams_names_title">Name the teams</string>
     <string name="play_word">Play</string>
     <string name="plus_sign">+</string>
+    <string name="team_no_title">TEAM No</string>
+    <string name="team_name_hint">Team name</string>
 </resources>

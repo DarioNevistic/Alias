@@ -1,4 +1,4 @@
-package com.example.darionevistic.alias.ui
+package com.example.darionevistic.alias.ui.splash
 
 import android.content.Intent
 import android.os.Bundle

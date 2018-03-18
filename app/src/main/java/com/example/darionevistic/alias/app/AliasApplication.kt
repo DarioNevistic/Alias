@@ -19,7 +19,8 @@ class AliasApplication : Application() {
     companion object {
         lateinit var component: AppComponent
 
-        operator fun get(activity: Activity): AliasApplication {
+        @JvmStatic
+        fun get(activity: Activity): AliasApplication {
             return activity.application as AliasApplication
         }
 
@@ -39,7 +40,7 @@ class AliasApplication : Application() {
             // TODO Timber.plant(new CrashlyticsTree());
         }
 
-        initializeDependencies();
+        initializeDependencies()
     }
 
     private fun initializeDependencies() {

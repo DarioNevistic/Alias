@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,7 +20,9 @@
         <activity android:name=".ui.rules.RulesActivity" />
         <activity android:name=".ui.main_game.MainGameActivity" />
         <activity android:name=".ui.settings.SettingsActivity" />
-        <activity android:name=".ui.teams.TeamsActivity" />
+        <activity
+            android:name=".ui.teams.TeamsActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

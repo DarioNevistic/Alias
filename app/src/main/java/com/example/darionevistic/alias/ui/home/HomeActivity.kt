@@ -33,18 +33,20 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val component: HomeComponent = DaggerHomeComponent.builder()
-                .homeModule(HomeModule(this))
-                .appComponent(AliasApplication[this].component())
-                .build()
-        component.inject(this)
+        initDagger()
 
         setContentView(R.layout.activity_home)
         homePresenter.onViewCreated()
 
-
         loadSettings()
+    }
 
+    private fun initDagger() {
+        DaggerHomeComponent.builder()
+                .homeModule(HomeModule(this))
+                .appComponent(AliasApplication.get(this).component())
+                .build()
+                .inject(this)
     }
 
     override fun setMessage(message: String) {
