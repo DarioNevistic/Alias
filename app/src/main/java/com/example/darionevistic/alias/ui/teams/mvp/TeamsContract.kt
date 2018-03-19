@@ -16,6 +16,8 @@ interface TeamsContract {
 
         fun observeAddTeamBtn(): Observable<Any>
 
+        fun observePlayBtn(): Observable<Any>
+
         fun showTeamsListView(teams: MutableList<Team>)
     }
 
@@ -26,6 +28,8 @@ interface TeamsContract {
         fun onSettingsPressed(): Disposable
 
         fun onAddTeamPressed(): Disposable
+
+        fun onPlayPressed(): Disposable
 
         fun getTeams(): Disposable
     }

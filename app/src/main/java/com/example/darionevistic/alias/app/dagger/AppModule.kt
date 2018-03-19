@@ -1,13 +1,9 @@
 package com.example.darionevistic.alias.app.dagger
 
-import android.app.Application
 import android.content.Context
 import com.example.darionevistic.alias.app.AliasApplication
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
-
-
 
 /**
  * Created by dario.nevistic on 07/03/2018.

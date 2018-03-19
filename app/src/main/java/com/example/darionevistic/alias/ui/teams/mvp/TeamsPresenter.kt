@@ -21,7 +21,8 @@ class TeamsPresenter(var view: TeamsActivity, private var model: TeamsModel) : B
         compositeDisposable.addAll(onBackPressed(),
                 onSettingsPressed(),
                 getTeams(),
-                onAddTeamPressed())
+                onAddTeamPressed(),
+                onPlayPressed())
     }
 
     override fun onViewDestroyed() {
@@ -48,6 +49,12 @@ class TeamsPresenter(var view: TeamsActivity, private var model: TeamsModel) : B
                 .subscribe({
                     view.showTeamsListView(model.addTeam(view.getTeamList()))
                 }, { error -> Timber.d(error.localizedMessage) })
+    }
+
+    override fun onPlayPressed(): Disposable {
+        return view.observePlayBtn()
+                .subscribe({ model.storeTeamsInDB(view.getTeamList()) },
+                        { throwable -> Timber.d(throwable.localizedMessage) })
     }
 
     override fun getTeams(): Disposable {

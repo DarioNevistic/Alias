@@ -1,5 +1,6 @@
 package com.example.darionevistic.alias.ui.teams.mvp
 
+import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.database.dao.TeamDao
 import com.example.darionevistic.alias.database.entity.Team
 import com.example.darionevistic.alias.ui.teams.TeamsActivity
@@ -14,8 +15,7 @@ import javax.inject.Inject
  */
 class TeamsModel @Inject constructor(private val teamDao: TeamDao, private val teamsActivity: TeamsActivity) {
 
-    private val teamsNames = arrayOf("Team1", "Team2", "Team3", "Team4",
-            "Team5", "Team6", "Team7", "Team8")
+    private val teamsNames = teamsActivity.resources.getStringArray(R.array.teams_names)
 
     fun goBackToPreviousActivity() = teamsActivity.finish()
 
@@ -32,7 +32,7 @@ class TeamsModel @Inject constructor(private val teamDao: TeamDao, private val t
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe {
-                    Timber.d("Inserted ${teams.size} teams from API in DB...")
+                    Timber.d("Inserted ${teams.size} teams in DB...")
                 }
     }
 
@@ -45,9 +45,8 @@ class TeamsModel @Inject constructor(private val teamDao: TeamDao, private val t
     }
 
     fun addTeam(teamList: MutableList<Team>): MutableList<Team> {
-        Timber.d("0")
         for (t in 0 until teamsNames.size) {
-            if(!teamList.contains(Team(teamsNames[t]))) {
+            if (!teamList.contains(Team(teamsNames[t]))) {
                 teamList.add(Team(teamsNames[t]))
                 break
             }

@@ -1,6 +1,7 @@
-package com.example.darionevistic.alias.adapter
+package com.example.darionevistic.alias.ui.teams
 
 import android.support.v7.widget.RecyclerView
+import android.transition.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +18,19 @@ class TeamsAdapter(val presenter: TeamsPresenter,
                    private val teamsList: MutableList<Team>,
                    private val itemClick: RecyclerViewClickListener) : RecyclerView.Adapter<TeamsAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_team, parent, false)
         return ViewHolder(v, itemClick)
     }
 
     override fun getItemCount(): Int = teamsList.size
 
-    override fun onBindViewHolder(holder: TeamsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if(teamsList.size > 2) {
+            holder.itemView.remove_team_btn.visibility = View.VISIBLE
+        } else {
+            holder.itemView.remove_team_btn.visibility = View.GONE
+        }
         holder.bindItems(teamsList[position])
     }
 

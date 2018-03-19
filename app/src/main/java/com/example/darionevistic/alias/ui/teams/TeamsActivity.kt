@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.util.RecyclerViewClickListener
-import com.example.darionevistic.alias.adapter.TeamsAdapter
 import com.example.darionevistic.alias.app.AliasApplication
 import com.example.darionevistic.alias.database.entity.Team
 import com.example.darionevistic.alias.ui.settings.SettingsActivity
@@ -56,6 +55,8 @@ class TeamsActivity : AppCompatActivity(), TeamsContract.View, RecyclerViewClick
     override fun observeSettingsBtn(): Observable<Any> = RxView.clicks(teams_settings_button)
 
     override fun observeAddTeamBtn(): Observable<Any> = RxView.clicks(add_team_btn)
+
+    override fun observePlayBtn(): Observable<Any> = RxView.clicks(play_btn)
 
     override fun onDestroy() {
         super.onDestroy()

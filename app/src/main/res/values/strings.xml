@@ -31,4 +31,27 @@
     <string name="plus_sign">+</string>
     <string name="team_no_title">TEAM No</string>
     <string name="team_name_hint">Team name</string>
+
+
+    <string-array name="teams_names">
+        <item>Scorpions</item>
+        <item>Raptors</item>
+        <item>Tigers</item>
+        <item>Stars</item>
+        <item>Rangers</item>
+        <item>Trojans</item>
+        <item>Warriors</item>
+        <item>Vikings</item>
+        <item>Predators</item>
+        <item>Bulls</item>
+        <item>Amigos</item>
+        <item>Hustlers</item>
+        <item>Lizards</item>
+        <item>Magicians</item>
+        <item>Mavericks</item>
+        <item>Phoenix</item>
+        <item>Mad Dogs</item>
+        <item>Chaos</item>
+        <item>Enigma</item>
+    </string-array>
 </resources>
