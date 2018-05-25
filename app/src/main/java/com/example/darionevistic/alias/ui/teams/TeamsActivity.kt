@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.darionevistic.alias.R
-import com.example.darionevistic.alias.util.RecyclerViewClickListener
 import com.example.darionevistic.alias.database.entity.Team
 import com.example.darionevistic.alias.ui.main_game.MainGameActivity
 import com.example.darionevistic.alias.ui.settings.SettingsActivity
+import com.example.darionevistic.alias.util.RecyclerViewClickListener
 import com.jakewharton.rxbinding2.view.RxView
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
@@ -35,7 +35,7 @@ class TeamsActivity : DaggerAppCompatActivity(), TeamsContract.View, RecyclerVie
 
     fun goToSettingsActivity() = startActivity(Intent(this@TeamsActivity, SettingsActivity::class.java))
 
-    fun goToMainGameActivity()= startActivity(Intent(this@TeamsActivity, MainGameActivity::class.java))
+    fun goToMainGameActivity() = startActivity(Intent(this@TeamsActivity, MainGameActivity::class.java))
 
     override fun observeBackBtn(): Observable<Any> = RxView.clicks(back_button)
 

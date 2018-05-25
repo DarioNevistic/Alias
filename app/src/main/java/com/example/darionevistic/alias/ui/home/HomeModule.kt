@@ -1,6 +1,5 @@
 package com.example.darionevistic.alias.ui.home
 
-import com.example.darionevistic.alias.database.dao.SettingsDao
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,5 +14,5 @@ abstract class HomeModule {
     internal abstract fun homeActivity(): HomeActivity
 
     @Binds
-    abstract fun providePresenter(homePresenter: HomePresenter) : HomeContract.Presenter
+    abstract fun providePresenter(homePresenter: HomePresenter): HomeContract.Presenter
 }

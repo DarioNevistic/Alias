@@ -1,6 +1,5 @@
 package com.example.darionevistic.alias.ui.settings
 
-import com.example.darionevistic.alias.database.dao.SettingsDao
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,6 +14,6 @@ abstract class SettingsModule {
     internal abstract fun settingsActivity(): SettingsActivity
 
     @Binds
-    abstract fun providePresenter(settingsPresenter: SettingsPresenter) : SettingsContract.Presenter
+    abstract fun providePresenter(settingsPresenter: SettingsPresenter): SettingsContract.Presenter
 
 }

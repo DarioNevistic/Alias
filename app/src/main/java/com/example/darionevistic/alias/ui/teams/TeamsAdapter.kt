@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.darionevistic.alias.R
-import com.example.darionevistic.alias.util.RecyclerViewClickListener
 import com.example.darionevistic.alias.database.entity.Team
+import com.example.darionevistic.alias.util.RecyclerViewClickListener
 import kotlinx.android.synthetic.main.item_team.view.*
 
 /**
@@ -24,7 +24,7 @@ class TeamsAdapter(val presenter: TeamsPresenter,
     override fun getItemCount(): Int = teamsList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if(teamsList.size > 2) {
+        if (teamsList.size > 2) {
             holder.itemView.remove_team_btn.visibility = View.VISIBLE
         } else {
             holder.itemView.remove_team_btn.visibility = View.GONE

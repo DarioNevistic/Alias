@@ -7,80 +7,80 @@
     android:orientation="vertical">
 
 
-        <RelativeLayout
-            style="@style/heightWrap_widthMatch"
-            android:layout_above="@id/linear1"
+    <RelativeLayout
+        style="@style/heightWrap_widthMatch"
+        android:layout_above="@id/linear1"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/round_text"
+            style="@style/wrap"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenir_bold"
+            android:text="Round"
+            android:textColor="@color/black_in_game"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/round_number_dialog"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/round_text"
+            android:background="@drawable/rounded_red_background_4dp"
+            android:fontFamily="@font/avenir_bold"
             android:gravity="center"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/round_text"
-                style="@style/wrap"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/avenir_bold"
-                android:text="Round"
-                android:textColor="@color/black_in_game"
-                android:textSize="16sp" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/round_number_dialog"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/round_text"
-                android:background="@drawable/rounded_red_background_4dp"
-                android:fontFamily="@font/avenir_bold"
-                android:gravity="center"
-                android:text="1"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
+    <RelativeLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/rounded_red_background_8dp"
+        android:orientation="vertical">
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/get_ready_title"
+            style="@style/heightWrap_widthMatch"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/avenir_medium"
+            android:text="@string/get_ready_text"
+            android:textAlignment="center"
+            android:textColor="@color/white_transparent_60"
+            android:textSize="16sp" />
 
-        <RelativeLayout
-            android:id="@+id/linear1"
+        <TextView
+            android:id="@+id/team_name_dialog"
+            style="@style/heightWrap_widthMatch"
+            android:layout_below="@id/get_ready_title"
+            android:fontFamily="@font/avenir_bold"
+            android:text="Rockstars"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/start_game_dialog"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:background="@drawable/rounded_red_background_8dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/get_ready_title"
-                style="@style/heightWrap_widthMatch"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenir_medium"
-                android:text="@string/get_ready_text"
-                android:textAlignment="center"
-                android:textColor="@color/white_transparent_60"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/team_name_dialog"
-                style="@style/heightWrap_widthMatch"
-                android:layout_below="@id/get_ready_title"
-                android:fontFamily="@font/avenir_bold"
-                android:text="Rockstars"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/start_game_dialog"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/rounded_white_4dp"
-                android:fontFamily="@font/avenir_bold"
-                android:foreground="?attr/selectableItemBackground"
-                android:text="@string/start_text"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
+            android:layout_height="46dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/rounded_white_4dp"
+            android:fontFamily="@font/avenir_bold"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/start_text"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
 
 
-        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

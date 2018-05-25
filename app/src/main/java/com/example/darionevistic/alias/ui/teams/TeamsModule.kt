@@ -1,6 +1,5 @@
 package com.example.darionevistic.alias.ui.teams
 
-import com.example.darionevistic.alias.database.dao.TeamDao
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,5 +14,5 @@ abstract class TeamsModule {
     internal abstract fun teamsActivity(): TeamsActivity
 
     @Binds
-    abstract fun providePresenter(presenter: TeamsPresenter) : TeamsContract.Presenter
+    abstract fun providePresenter(presenter: TeamsPresenter): TeamsContract.Presenter
 }

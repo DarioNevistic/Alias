@@ -2,12 +2,12 @@ package com.example.darionevistic.alias.ui.main_game
 
 import android.app.Fragment
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.darionevistic.alias.R
 import javax.inject.Inject
-import android.support.v7.app.AlertDialog
 
 
 /**

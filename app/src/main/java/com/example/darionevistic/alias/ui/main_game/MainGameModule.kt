@@ -14,5 +14,5 @@ abstract class MainGameModule {
     internal abstract fun mainGameActivity(): MainGameActivity
 
     @Binds
-    abstract fun provideMainGamePresenter(mainGamePresenter: MainGamePresenter) : MainGameContract.Presenter
+    abstract fun provideMainGamePresenter(mainGamePresenter: MainGamePresenter): MainGameContract.Presenter
 }

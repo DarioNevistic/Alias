@@ -2,10 +2,8 @@ package com.example.darionevistic.alias.ui.settings
 
 import com.example.darionevistic.alias.database.entity.SettingsData
 import com.jakewharton.rxbinding2.InitialValueObservable
-import com.jakewharton.rxbinding2.widget.SeekBarChangeEvent
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
-import rx.Subscription
 
 /**
  * Created by dario.nevistic on 08/03/2018.
@@ -33,7 +31,7 @@ interface SettingsContract {
         fun observePointsForVictory(): InitialValueObservable<Int>
 
         fun observeRoundTimeInSeconds(): InitialValueObservable<Int>
-//
+        //
         fun observeCommonFinalWord(): InitialValueObservable<Boolean>
 //
 //        fun observeFinalWordPointsWorth()

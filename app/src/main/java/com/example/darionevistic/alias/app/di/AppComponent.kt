@@ -14,7 +14,7 @@ import javax.inject.Singleton
     , (RoomModule::class),
     AndroidSupportInjectionModule::class,
     ActivityBindingModule::class])
-interface AppComponent: AndroidInjector<AliasApplication> {
+interface AppComponent : AndroidInjector<AliasApplication> {
 
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<AliasApplication>()

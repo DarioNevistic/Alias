@@ -7,11 +7,12 @@ import com.example.darionevistic.alias.database.entity.SettingsData
 import com.example.darionevistic.alias.ext.Constants
 import com.jakewharton.rxbinding2.InitialValueObservable
 import com.jakewharton.rxbinding2.view.RxView
-import kotlinx.android.synthetic.main.activity_settings.*
-import javax.inject.Inject
-import com.jakewharton.rxbinding2.widget.*
+import com.jakewharton.rxbinding2.widget.RxCompoundButton
+import com.jakewharton.rxbinding2.widget.RxSeekBar
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_settings.*
+import javax.inject.Inject
 
 
 /**

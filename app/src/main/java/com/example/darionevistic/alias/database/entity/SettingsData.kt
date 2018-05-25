@@ -22,6 +22,6 @@ data class SettingsData(
         @ColumnInfo(name = "common_final_word")
         var commonFinalWord: Boolean = false
 ) {
-        constructor(): this(0, 100, 60, 0, false, false)
+    constructor() : this(0, 100, 60, 0, false, false)
 
 }

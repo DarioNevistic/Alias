@@ -6,7 +6,6 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
 import com.example.darionevistic.alias.database.entity.SettingsData
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 
 /**
  * Created by dario.nevistic on 12/03/2018.
