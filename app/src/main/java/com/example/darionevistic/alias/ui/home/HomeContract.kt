@@ -1,4 +1,4 @@
-package com.example.darionevistic.alias.ui.home.mvp
+package com.example.darionevistic.alias.ui.home
 
 import com.example.darionevistic.alias.database.entity.SettingsData
 import com.example.darionevistic.alias.database.entity.Team

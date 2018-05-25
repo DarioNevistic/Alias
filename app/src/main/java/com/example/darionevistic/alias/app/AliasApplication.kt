@@ -1,12 +1,10 @@
 package com.example.darionevistic.alias.app
 
-import android.app.Activity
-import android.app.Application
 import com.example.darionevistic.alias.BuildConfig
-import com.example.darionevistic.alias.app.dagger.AppComponent
-import com.example.darionevistic.alias.app.dagger.AppModule
-import com.example.darionevistic.alias.app.dagger.DaggerAppComponent
+import com.example.darionevistic.alias.app.di.DaggerAppComponent
 import com.example.darionevistic.alias.ext.Constants
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 import timber.log.Timber
 
 
@@ -14,16 +12,10 @@ import timber.log.Timber
  * Created by dario.nevistic on 07/03/2018.
  */
 
-class AliasApplication : Application() {
+class AliasApplication : DaggerApplication() {
 
-    companion object {
-        lateinit var component: AppComponent
-
-        @JvmStatic
-        fun get(activity: Activity): AliasApplication {
-            return activity.application as AliasApplication
-        }
-
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
     }
 
     override fun onCreate() {
@@ -39,17 +31,5 @@ class AliasApplication : Application() {
             // TODO Crashlytics.start(this);
             // TODO Timber.plant(new CrashlyticsTree());
         }
-
-        initializeDependencies()
-    }
-
-    private fun initializeDependencies() {
-        component = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
-    }
-
-    fun component(): AppComponent {
-        return component
     }
 }

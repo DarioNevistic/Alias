@@ -1,4 +1,4 @@
-package com.example.darionevistic.alias.ui.teams.mvp
+package com.example.darionevistic.alias.ui.teams
 
 import com.example.darionevistic.alias.database.entity.Team
 import io.reactivex.Observable

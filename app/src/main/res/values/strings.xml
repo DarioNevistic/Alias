@@ -31,6 +31,8 @@
     <string name="plus_sign">+</string>
     <string name="team_no_title">TEAM No</string>
     <string name="team_name_hint">Team name</string>
+    <string name="get_ready_text">Get Ready</string>
+    <string name="start_text">Start</string>
 
 
     <string-array name="teams_names">

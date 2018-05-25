@@ -1,4 +1,4 @@
-package com.example.darionevistic.alias.ui.settings.mvp
+package com.example.darionevistic.alias.ui.settings
 
 import com.example.darionevistic.alias.database.entity.SettingsData
 import com.jakewharton.rxbinding2.InitialValueObservable

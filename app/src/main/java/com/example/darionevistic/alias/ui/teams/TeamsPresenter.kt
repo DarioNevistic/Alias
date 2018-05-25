@@ -1,18 +1,17 @@
-package com.example.darionevistic.alias.ui.teams.mvp
+package com.example.darionevistic.alias.ui.teams
 
 import com.example.darionevistic.alias.base.BasePresenter
-import com.example.darionevistic.alias.database.entity.Team
-import com.example.darionevistic.alias.ui.teams.TeamsActivity
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Created by dario.nevistic on 16/03/2018.
  */
-class TeamsPresenter(var view: TeamsActivity, private var model: TeamsModel) : BasePresenter, TeamsContract.Presenter {
+class TeamsPresenter @Inject constructor(private val view: TeamsActivity, private val model: TeamsModel) : BasePresenter, TeamsContract.Presenter {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -53,7 +52,10 @@ class TeamsPresenter(var view: TeamsActivity, private var model: TeamsModel) : B
 
     override fun onPlayPressed(): Disposable {
         return view.observePlayBtn()
-                .subscribe({ model.storeTeamsInDB(view.getTeamList()) },
+                .observeOn(Schedulers.io())
+                .doOnNext { model.storeTeamsInDB(view.getTeamList()) }
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe({ view.goToMainGameActivity() },
                         { throwable -> Timber.d(throwable.localizedMessage) })
     }
 

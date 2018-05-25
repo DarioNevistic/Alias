@@ -1,10 +1,9 @@
-package com.example.darionevistic.alias.ui.settings.mvp
+package com.example.darionevistic.alias.ui.settings
 
 import com.example.darionevistic.alias.base.BasePresenter
 import com.example.darionevistic.alias.database.dao.SettingsDao
 import com.example.darionevistic.alias.database.entity.SettingsData
 import com.example.darionevistic.alias.ext.Constants
-import com.example.darionevistic.alias.ui.settings.SettingsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

@@ -2,20 +2,15 @@ package com.example.darionevistic.alias.ui.teams
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.util.RecyclerViewClickListener
-import com.example.darionevistic.alias.app.AliasApplication
 import com.example.darionevistic.alias.database.entity.Team
+import com.example.darionevistic.alias.ui.main_game.MainGameActivity
 import com.example.darionevistic.alias.ui.settings.SettingsActivity
-import com.example.darionevistic.alias.ui.teams.di.DaggerTeamsComponent
-import com.example.darionevistic.alias.ui.teams.di.TeamsComponent
-import com.example.darionevistic.alias.ui.teams.di.TeamsModule
-import com.example.darionevistic.alias.ui.teams.mvp.TeamsContract
-import com.example.darionevistic.alias.ui.teams.mvp.TeamsPresenter
 import com.jakewharton.rxbinding2.view.RxView
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_teams.*
 import javax.inject.Inject
@@ -23,7 +18,7 @@ import javax.inject.Inject
 /**
  * Created by dario.nevistic on 16/03/2018.
  */
-class TeamsActivity : AppCompatActivity(), TeamsContract.View, RecyclerViewClickListener {
+class TeamsActivity : DaggerAppCompatActivity(), TeamsContract.View, RecyclerViewClickListener {
 
     @Inject
     lateinit var presenter: TeamsPresenter
@@ -32,23 +27,15 @@ class TeamsActivity : AppCompatActivity(), TeamsContract.View, RecyclerViewClick
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        initDagger()
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teams)
 
         presenter.onViewCreated()
     }
 
-    private fun initDagger() {
-        val component: TeamsComponent = DaggerTeamsComponent.builder()
-                .appComponent(AliasApplication.get(this).component())
-                .teamsModule(TeamsModule(this))
-                .build()
-        component.inject(this)
-    }
-
     fun goToSettingsActivity() = startActivity(Intent(this@TeamsActivity, SettingsActivity::class.java))
+
+    fun goToMainGameActivity()= startActivity(Intent(this@TeamsActivity, MainGameActivity::class.java))
 
     override fun observeBackBtn(): Observable<Any> = RxView.clicks(back_button)
 

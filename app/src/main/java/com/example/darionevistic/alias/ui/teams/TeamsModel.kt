@@ -1,9 +1,8 @@
-package com.example.darionevistic.alias.ui.teams.mvp
+package com.example.darionevistic.alias.ui.teams
 
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.database.dao.TeamDao
 import com.example.darionevistic.alias.database.entity.Team
-import com.example.darionevistic.alias.ui.teams.TeamsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

@@ -1,10 +1,8 @@
-package com.example.darionevistic.alias.ui.home.mvp
+package com.example.darionevistic.alias.ui.home
 
 import com.example.darionevistic.alias.base.BasePresenter
-import com.example.darionevistic.alias.database.AppDatabase
 import com.example.darionevistic.alias.database.dao.SettingsDao
 import com.example.darionevistic.alias.database.entity.SettingsData
-import com.example.darionevistic.alias.ui.home.HomeActivity
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

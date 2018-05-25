@@ -5,4 +5,5 @@
     <color name="black_in_game">#313131</color>
     <color name="grey_c9cad2">#c9cad2</color>
     <color name="grey_b2b2b2">#b2b2b2</color>
+    <color name="white_transparent_60">#99ffffff</color>
 </resources>

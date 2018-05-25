@@ -1,29 +1,23 @@
 package com.example.darionevistic.alias.ui.settings
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.example.darionevistic.alias.R
-import com.example.darionevistic.alias.app.AliasApplication
 import com.example.darionevistic.alias.database.entity.SettingsData
 import com.example.darionevistic.alias.ext.Constants
-import com.example.darionevistic.alias.ui.settings.di.DaggerSettingsComponent
-import com.example.darionevistic.alias.ui.settings.di.SettingsComponent
-import com.example.darionevistic.alias.ui.settings.di.SettingsModule
-import com.example.darionevistic.alias.ui.settings.mvp.SettingsContract
-import com.example.darionevistic.alias.ui.settings.mvp.SettingsPresenter
 import com.jakewharton.rxbinding2.InitialValueObservable
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_settings.*
 import javax.inject.Inject
 import com.jakewharton.rxbinding2.widget.*
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
 
 
 /**
  * Created by dario.nevistic on 08/03/2018.
  */
-class SettingsActivity : AppCompatActivity(), SettingsContract.View {
+class SettingsActivity : DaggerAppCompatActivity(), SettingsContract.View {
 
     @Inject
     lateinit var presenter: SettingsPresenter
@@ -31,21 +25,12 @@ class SettingsActivity : AppCompatActivity(), SettingsContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initDagger()
-
         setContentView(R.layout.activity_settings)
 
         loadSeekBars()
 
         presenter.onViewCreated()
 
-    }
-
-    private fun initDagger() {
-        DaggerSettingsComponent.builder()
-                .appComponent(AliasApplication.get(this).component())
-                .settingsModule(SettingsModule(this)).build()
-                .inject(this)
     }
 
     override fun observePointsForVictory(): InitialValueObservable<Int> = RxSeekBar.userChanges(points_seek_bar)

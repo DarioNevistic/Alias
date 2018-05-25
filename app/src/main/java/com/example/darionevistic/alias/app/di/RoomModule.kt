@@ -1,33 +1,35 @@
-package com.example.darionevistic.alias.app.dagger
+package com.example.darionevistic.alias.app.di
 
 import android.content.Context
 import com.example.darionevistic.alias.database.AppDatabase
 import com.example.darionevistic.alias.database.dao.SettingsDao
 import com.example.darionevistic.alias.database.dao.TeamDao
-import com.example.darionevistic.alias.database.entity.Team
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
+import dagger.Reusable
 
 
 /**
  * Created by dario.nevistic on 12/03/2018.
  */
 @Module
-class RoomModule {
+object RoomModule {
 
-    @AppScope
     @Provides
+    @Reusable
+    @JvmStatic
     fun provideAppDatabase(context: Context) = AppDatabase.createPersistentDatabase(context)
 
     @Provides
-    @AppScope
+    @Reusable
+    @JvmStatic
     fun provideSettingsDao(appDatabase: AppDatabase): SettingsDao {
         return appDatabase.settingsDao()
     }
 
     @Provides
-    @AppScope
+    @Reusable
+    @JvmStatic
     fun provideTeamnDao(appDatabase: AppDatabase): TeamDao {
         return appDatabase.teamDao()
     }

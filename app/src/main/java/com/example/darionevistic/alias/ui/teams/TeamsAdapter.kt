@@ -1,14 +1,12 @@
 package com.example.darionevistic.alias.ui.teams
 
 import android.support.v7.widget.RecyclerView
-import android.transition.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.util.RecyclerViewClickListener
 import com.example.darionevistic.alias.database.entity.Team
-import com.example.darionevistic.alias.ui.teams.mvp.TeamsPresenter
 import kotlinx.android.synthetic.main.item_team.view.*
 
 /**
