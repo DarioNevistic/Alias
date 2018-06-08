@@ -13,7 +13,8 @@ import javax.inject.Singleton
 @Component(modules = [(AppModule::class)
     , (RoomModule::class),
     AndroidSupportInjectionModule::class,
-    ActivityBindingModule::class])
+    ActivityBindingModule::class,
+    FragmentBindingModule::class])
 interface AppComponent : AndroidInjector<AliasApplication> {
 
     @Component.Builder

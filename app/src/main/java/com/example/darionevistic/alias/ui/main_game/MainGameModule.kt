@@ -10,9 +10,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class MainGameModule {
 
-    @ContributesAndroidInjector
-    internal abstract fun mainGameActivity(): MainGameActivity
-
     @Binds
     abstract fun provideMainGamePresenter(mainGamePresenter: MainGamePresenter): MainGameContract.Presenter
 }

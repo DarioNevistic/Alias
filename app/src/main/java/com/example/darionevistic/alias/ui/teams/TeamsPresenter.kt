@@ -1,6 +1,7 @@
 package com.example.darionevistic.alias.ui.teams
 
 import com.example.darionevistic.alias.base.BasePresenter
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -61,12 +62,7 @@ class TeamsPresenter @Inject constructor(private val view: TeamsActivity, privat
 
     override fun getTeams(): Disposable {
         return model.getTeamsFromDB()
-                .map { it.take(2) }
                 .subscribe({
-                    if (it.isEmpty()) {
-                        model.storeTeamsInDB(model.loadDefaultTeams(2))
-                        getTeams()
-                    }
                     view.showTeamsListView(it.toMutableList())
                 }, { throwable -> Timber.d(throwable.localizedMessage) })
 

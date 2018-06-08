@@ -14,7 +14,8 @@ import javax.inject.Inject
 /**
  * Created by dario.nevistic on 07/03/2018.
  */
-class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, var view: HomeActivity) : BasePresenter, HomeContract.Presenter {
+class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, var view: HomeActivity,
+                                        private val model: HomeModel) : BasePresenter, HomeContract.Presenter {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -35,7 +36,8 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
                 .subscribe())
 
         compositeDisposable.addAll(getAllSettings(),
-                onNewGamePressed())
+                onNewGamePressed(),
+                getTeamsFromDB())
 
     }
 
@@ -70,4 +72,16 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
                         { error -> Timber.d(error.localizedMessage) })
     }
 
+    override fun getTeamsFromDB(): Disposable {
+        return model.getTeamsFromDB()
+                .subscribe({
+                    if (it.isEmpty()) {
+                        Timber.i("Home presenter: it is empty")
+                        model.storeTeamsInDB(model.loadDefaultTeams(2))
+                    } else {
+                        Timber.i("Home presenter: it is not empty")
+                    }
+                }, { throwable -> Timber.d(throwable.localizedMessage) })
+
+    }
 }

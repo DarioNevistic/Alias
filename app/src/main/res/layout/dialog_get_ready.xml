@@ -9,7 +9,6 @@
 
     <RelativeLayout
         style="@style/heightWrap_widthMatch"
-        android:layout_above="@id/linear1"
         android:gravity="center"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal">
@@ -20,7 +19,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/avenir_bold"
             android:text="Round"
-            android:textColor="@color/black_in_game"
+            android:textColor="@android:color/white"
             android:textSize="16sp" />
 
         <TextView
@@ -67,7 +66,7 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/start_game_dialog"
+            android:id="@+id/start_game_dialog_btn"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_alignParentBottom="true"

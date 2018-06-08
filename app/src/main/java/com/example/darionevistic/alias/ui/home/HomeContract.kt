@@ -1,6 +1,7 @@
 package com.example.darionevistic.alias.ui.home
 
 import com.example.darionevistic.alias.database.entity.SettingsData
+import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 /**
@@ -23,6 +24,14 @@ interface HomeContract {
         fun openSettingsActivity()
 
         fun loadSettings()
+
+        fun observeContinueGameBtn(): Observable<Any>
+
+        fun observeNewGameBtn(): Observable<Any>
+
+        fun observeRulesGameBtn(): Observable<Any>
+
+        fun observeSettingsGameBtn(): Observable<Any>
     }
 
     interface Presenter {
@@ -33,5 +42,6 @@ interface HomeContract {
 
         fun onNewGamePressed(): Disposable
 
+        fun getTeamsFromDB(): Disposable
     }
 }

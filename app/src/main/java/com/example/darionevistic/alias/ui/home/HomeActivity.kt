@@ -52,6 +52,7 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
 
     override fun openNewGameActivity() {
         startActivity(Intent(this@HomeActivity, TeamsActivity::class.java))
+        finish()
     }
 
     override fun openRulesActivity() {
@@ -66,13 +67,13 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
         homePresenter.getAllSettings()
     }
 
-    fun observeContinueGameBtn(): Observable<Any> = RxView.clicks(continue_game_layout_holder)
+    override fun observeContinueGameBtn(): Observable<Any> = RxView.clicks(continue_game_layout_holder)
 
-    fun observeNewGameBtn(): Observable<Any> = RxView.clicks(new_game_layout_holder)
+    override fun observeNewGameBtn(): Observable<Any> = RxView.clicks(new_game_layout_holder)
 
-    fun observeRulesGameBtn(): Observable<Any> = RxView.clicks(rules_layout_holder)
+    override fun observeRulesGameBtn(): Observable<Any> = RxView.clicks(rules_layout_holder)
 
-    fun observeSettingsGameBtn(): Observable<Any> = RxView.clicks(home_settings_button)
+    override fun observeSettingsGameBtn(): Observable<Any> = RxView.clicks(home_settings_button)
 
     override fun onDestroy() {
         super.onDestroy()

@@ -35,7 +35,10 @@ class TeamsActivity : DaggerAppCompatActivity(), TeamsContract.View, RecyclerVie
 
     fun goToSettingsActivity() = startActivity(Intent(this@TeamsActivity, SettingsActivity::class.java))
 
-    fun goToMainGameActivity() = startActivity(Intent(this@TeamsActivity, MainGameActivity::class.java))
+    fun goToMainGameActivity() {
+        startActivity(Intent(this@TeamsActivity, MainGameActivity::class.java))
+        finish()
+    }
 
     override fun observeBackBtn(): Observable<Any> = RxView.clicks(back_button)
 

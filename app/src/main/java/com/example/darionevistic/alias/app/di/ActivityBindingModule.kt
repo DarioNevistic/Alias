@@ -19,14 +19,14 @@ abstract class ActivityBindingModule {
     abstract fun bindHomeActivity(): HomeActivity
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = [MainGameModule::class])
-    abstract fun bindMainActivity(): MainGameActivity
-
-    @ActivityScoped
     @ContributesAndroidInjector(modules = [SettingsModule::class])
     abstract fun bindSettingsActivity(): SettingsActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = [TeamsModule::class])
     abstract fun bindTeamsActivity(): TeamsActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector
+    internal abstract fun bindMainGameActivity(): MainGameActivity
 }
