@@ -33,6 +33,8 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
 
     private lateinit var countDownTimer: CountDownTimer
 
+    private var roundTime = 60
+
     companion object {
         fun newInstance() =
                 MainGameFragment()
@@ -57,6 +59,10 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     }
 
     override fun observeStartBtn(): Observable<Any> = RxView.clicks(dialog.findViewById(R.id.start_game_dialog_btn))
+
+    override fun observeCorrectBtn(): Observable<Any> = RxView.clicks(correct_answer_btn)
+
+    override fun observeWrongBtn(): Observable<Any> = RxView.clicks(wrong_answer_btn)
 
     override fun showStartDialog() {
         dialog = Dialog(activity)
@@ -85,7 +91,7 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     override fun startTimer() {
         var secondsLeft = 0
 
-        countDownTimer = object : CountDownTimer(60000, 100) {
+        countDownTimer = object : CountDownTimer(((roundTime * 1000).toLong()), 100) {
             override fun onTick(ms: Long) {
                 if (Math.round(ms.toFloat() / 1000.0f) != secondsLeft) {
                     secondsLeft = Math.round(ms.toFloat() / 1000.0f)
@@ -101,6 +107,10 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
 
     override fun stopTimer() {
         countDownTimer.cancel()
-        // TODO implement seconds left when pause happened
+    }
+
+    override fun setRoundTime(seconds: Int) {
+        roundTime = seconds
+        seconds_remained.text = roundTime.toString()
     }
 }

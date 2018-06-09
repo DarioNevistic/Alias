@@ -1,9 +1,6 @@
 package com.example.darionevistic.alias.database.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.example.darionevistic.alias.database.entity.Team
 import io.reactivex.Single
 
@@ -15,6 +12,9 @@ interface TeamDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTeams(teams: MutableList<Team>)
+
+    @Delete
+    fun deleteTeams(teams: MutableList<Team>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTeam(team: Team)

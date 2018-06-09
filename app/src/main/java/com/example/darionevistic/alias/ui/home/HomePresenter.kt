@@ -3,6 +3,7 @@ package com.example.darionevistic.alias.ui.home
 import com.example.darionevistic.alias.base.BasePresenter
 import com.example.darionevistic.alias.database.dao.SettingsDao
 import com.example.darionevistic.alias.database.entity.SettingsData
+import com.example.darionevistic.alias.database.entity.Team
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,9 +20,9 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun onViewCreated() {
-        view.isContinueGameEnabled(false)
+    private val oldTeams: MutableList<Team> = arrayListOf()
 
+    override fun onViewCreated() {
         compositeDisposable.add(view.observeContinueGameBtn()
                 .doOnNext { view.setMessage("Continue") }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -67,8 +68,12 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
 
     override fun onNewGamePressed(): Disposable {
         return view.observeNewGameBtn()
+                .doOnNext { model.deleteTeamsFromDB(oldTeams)}
+                .doOnNext { model.loadDefaultTeams(2).let { model.storeTeamsInDB(it) } }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ view.openNewGameActivity() },
+                .subscribe({
+                    view.openNewGameActivity()
+                },
                         { error -> Timber.d(error.localizedMessage) })
     }
 
@@ -77,9 +82,12 @@ class HomePresenter @Inject constructor(private val settingsDao: SettingsDao, va
                 .subscribe({
                     if (it.isEmpty()) {
                         Timber.i("Home presenter: it is empty")
+                        view.isContinueGameEnabled(false)
                         model.storeTeamsInDB(model.loadDefaultTeams(2))
                     } else {
                         Timber.i("Home presenter: it is not empty")
+                        view.isContinueGameEnabled(true)
+                        oldTeams.addAll(it)
                     }
                 }, { throwable -> Timber.d(throwable.localizedMessage) })
 

@@ -54,7 +54,8 @@ class TeamsPresenter @Inject constructor(private val view: TeamsActivity, privat
     override fun onPlayPressed(): Disposable {
         return view.observePlayBtn()
                 .observeOn(Schedulers.io())
-                .doOnNext { model.storeTeamsInDB(view.getTeamList()) }
+                .doOnNext { model.storeTeamsInDB(view.getTeamList())
+                Timber.d("Num of teams: ${view.getTeamList().size}")}
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view.goToMainGameActivity() },
                         { throwable -> Timber.d(throwable.localizedMessage) })

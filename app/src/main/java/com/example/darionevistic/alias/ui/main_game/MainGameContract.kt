@@ -16,14 +16,26 @@ interface MainGameContract {
 
         fun observeStartBtn(): Observable<Any>
 
+        fun observeCorrectBtn(): Observable<Any>
+
+        fun observeWrongBtn(): Observable<Any>
+
         fun initTeamsAdapter(teams: ArrayList<Team>)
 
         fun startTimer()
 
         fun stopTimer()
+
+        fun setRoundTime(seconds: Int)
     }
 
     interface Presenter {
         fun getTeams(): Disposable
+
+        fun getSettings(): Disposable
+
+        fun onCorrectAnswerPressed(): Disposable
+
+        fun onWrongAnswerPressed(): Disposable
     }
 }

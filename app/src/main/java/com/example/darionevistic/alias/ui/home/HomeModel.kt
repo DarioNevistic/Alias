@@ -31,11 +31,21 @@ class HomeModel @Inject constructor(private val teamDao: TeamDao, private val ho
                 }
     }
 
+    fun deleteTeamsFromDB(teams: MutableList<Team>) {
+        Observable.fromCallable { teamDao.deleteTeams(teams) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe {
+                    Timber.d("Deleted ${teams.size} teams in DB...")
+                }
+    }
+
     fun loadDefaultTeams(size: Int): MutableList<Team> {
         val teams: MutableList<Team> = mutableListOf()
         for (i in 0 until size) {
             teams.add(Team(teamsNames[i]))
         }
+        Timber.d("Load default teams: ${teams.size}")
         return teams
     }
 }

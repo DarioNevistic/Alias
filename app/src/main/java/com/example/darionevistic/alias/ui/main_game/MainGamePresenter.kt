@@ -17,7 +17,10 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
 
     override fun onViewCreated() {
         view.showStartDialog()
-        compositeDisposable.addAll(getTeams())
+        compositeDisposable.addAll(getTeams(),
+                getSettings(),
+                onCorrectAnswerPressed(),
+                onWrongAnswerPressed())
 
         compositeDisposable.add(view.observeStartBtn()
                 .subscribe { view.hideStartDialog() })
@@ -31,6 +34,24 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
         return model.getTeamsFromDB()
                 .subscribe {
                     Timber.d("Teams from DB: ${it.size}")
-                    view.initTeamsAdapter(it as ArrayList<Team>) }
+                    view.initTeamsAdapter(it as ArrayList<Team>)
+                }
+    }
+
+    override fun getSettings(): Disposable {
+        return model.getSettingsFromDB()
+                .subscribe {
+                    Timber.d("Round time: ${it.first().roundTime}")
+                    view.setRoundTime(it.first().roundTime) }
+    }
+
+    override fun onCorrectAnswerPressed(): Disposable {
+        return view.observeCorrectBtn()
+                .subscribe { Timber.d("Correct answer") }
+    }
+
+    override fun onWrongAnswerPressed(): Disposable {
+        return view.observeWrongBtn()
+                .subscribe { Timber.d("Wrong answer") }
     }
 }
