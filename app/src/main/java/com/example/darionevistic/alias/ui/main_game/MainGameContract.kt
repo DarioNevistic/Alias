@@ -1,5 +1,6 @@
 package com.example.darionevistic.alias.ui.main_game
 
+import com.example.darionevistic.alias.database.entity.SettingsData
 import com.example.darionevistic.alias.database.entity.Team
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -26,13 +27,27 @@ interface MainGameContract {
 
         fun stopTimer()
 
-        fun setRoundTime(seconds: Int)
+        fun loadSettings(settingsData: SettingsData)
+
+        fun onCorrectAnswer()
+
+        fun onWrongAnswer()
+
+        fun roundEnd()
+
+        fun getRandomWordDeleteOld(): String
+
+        fun getRandomWord(): String
+
+        fun setNextWord(word: String)
     }
 
     interface Presenter {
         fun getTeams(): Disposable
 
         fun getSettings(): Disposable
+
+        fun onStartRoundPressed(): Disposable
 
         fun onCorrectAnswerPressed(): Disposable
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.darionevistic.alias.R
 import com.example.darionevistic.alias.database.entity.Team
 import kotlinx.android.synthetic.main.item_in_game_team.view.*
+import timber.log.Timber
 
 class InGameTeamsAdapter(private var teamsList: ArrayList<Team>) : RecyclerView.Adapter<InGameTeamsAdapter.ViewHolder>() {
 
@@ -28,6 +29,7 @@ class InGameTeamsAdapter(private var teamsList: ArrayList<Team>) : RecyclerView.
 
         fun bindItems(team: Team) {
             with(team) {
+                Timber.d("Is team playing: ${team.isTeamPlaying}")
                 if(team.isTeamPlaying) {
                     itemView.team_name.setTextColor(Color.parseColor("#313131"))
                     itemView.team_points.setTextColor(Color.parseColor("#313131"))

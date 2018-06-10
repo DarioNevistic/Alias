@@ -1,6 +1,8 @@
 package com.example.darionevistic.alias.ui.teams
 
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,7 @@ import kotlinx.android.synthetic.main.item_team.view.*
  * Created by dario.nevistic on 16/03/2018.
  */
 class TeamsAdapter(val presenter: TeamsPresenter,
-                   private val teamsList: MutableList<Team>,
+                   private var teamsList: MutableList<Team>,
                    private val itemClick: RecyclerViewClickListener) : RecyclerView.Adapter<TeamsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,6 +43,20 @@ class TeamsAdapter(val presenter: TeamsPresenter,
                 itemView.team_no_title.text = "Team No$pos"
                 itemView.remove_team_btn.setOnClickListener(this@ViewHolder)
             }
+
+            itemView.team_name_edittext.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    team.teamName = s.toString()
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+            })
         }
 
         override fun onClick(v: View?) {
@@ -52,6 +68,11 @@ class TeamsAdapter(val presenter: TeamsPresenter,
 
     fun removeTeam(position: Int) {
         this.teamsList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    fun updateTeams(teams: ArrayList<Team>) {
+        teamsList = teams.toMutableList()
         notifyDataSetChanged()
     }
 

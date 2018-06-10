@@ -16,18 +16,23 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
     private val compositeDisposable = CompositeDisposable()
 
     override fun onViewCreated() {
-        view.showStartDialog()
         compositeDisposable.addAll(getTeams(),
                 getSettings(),
                 onCorrectAnswerPressed(),
-                onWrongAnswerPressed())
-
-        compositeDisposable.add(view.observeStartBtn()
-                .subscribe { view.hideStartDialog() })
+                onWrongAnswerPressed(),
+                onStartRoundPressed())
     }
 
     override fun onViewDestroyed() {
         compositeDisposable.clear()
+    }
+
+    override fun onStartRoundPressed(): Disposable {
+        return view.observeStartBtn()
+                .subscribe {
+                    Timber.d("Start round")
+                    view.setNextWord(view.getRandomWord())
+                    view.hideStartDialog() }
     }
 
     override fun getTeams(): Disposable {
@@ -35,23 +40,32 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
                 .subscribe {
                     Timber.d("Teams from DB: ${it.size}")
                     view.initTeamsAdapter(it as ArrayList<Team>)
+                    view.showStartDialog()
                 }
     }
 
     override fun getSettings(): Disposable {
         return model.getSettingsFromDB()
                 .subscribe {
-                    Timber.d("Round time: ${it.first().roundTime}")
-                    view.setRoundTime(it.first().roundTime) }
+                    Timber.d("Round time: ${it.first()}")
+                    view.loadSettings(it.first()) }
     }
 
     override fun onCorrectAnswerPressed(): Disposable {
         return view.observeCorrectBtn()
-                .subscribe { Timber.d("Correct answer") }
+                .subscribe {
+                    Timber.d("Correct answer")
+                    view.onCorrectAnswer()
+                    view.setNextWord(view.getRandomWordDeleteOld())
+                }
     }
 
     override fun onWrongAnswerPressed(): Disposable {
         return view.observeWrongBtn()
-                .subscribe { Timber.d("Wrong answer") }
+                .subscribe {
+                    Timber.d("Wrong answer")
+                    view.onWrongAnswer()
+                    view.setNextWord(view.getRandomWord())
+                }
     }
 }

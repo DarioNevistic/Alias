@@ -56,4 +56,26 @@
         <item>Chaos</item>
         <item>Enigma</item>
     </string-array>
+
+    <string-array name="words">
+        <item>Scorpions</item>
+        <item>Raptors</item>
+        <item>Tigers</item>
+        <item>Stars</item>
+        <item>Rangers</item>
+        <item>Trojans</item>
+        <item>Warriors</item>
+        <item>Vikings</item>
+        <item>Predators</item>
+        <item>Bulls</item>
+        <item>Amigos</item>
+        <item>Hustlers</item>
+        <item>Lizards</item>
+        <item>Magicians</item>
+        <item>Mavericks</item>
+        <item>Phoenix</item>
+        <item>Mad Dogs</item>
+        <item>Chaos</item>
+        <item>Enigma</item>
+    </string-array>
 </resources>
