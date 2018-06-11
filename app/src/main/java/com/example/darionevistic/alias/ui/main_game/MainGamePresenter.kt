@@ -32,7 +32,8 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
                 .subscribe {
                     Timber.d("Start round")
                     view.setNextWord(view.getRandomWord())
-                    view.hideStartDialog() }
+                    view.hideStartDialog()
+                }
     }
 
     override fun getTeams(): Disposable {
@@ -48,24 +49,27 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
         return model.getSettingsFromDB()
                 .subscribe {
                     Timber.d("Round time: ${it.first()}")
-                    view.loadSettings(it.first()) }
+                    view.loadSettings(it.first())
+                }
     }
 
     override fun onCorrectAnswerPressed(): Disposable {
         return view.observeCorrectBtn()
-                .subscribe {
+                .doOnNext {
                     Timber.d("Correct answer")
+                    view.slideToRight()
                     view.onCorrectAnswer()
-                    view.setNextWord(view.getRandomWordDeleteOld())
                 }
+                .subscribe()
     }
 
     override fun onWrongAnswerPressed(): Disposable {
         return view.observeWrongBtn()
-                .subscribe {
+                .doOnNext {
                     Timber.d("Wrong answer")
+                    view.slideToLeft()
                     view.onWrongAnswer()
-                    view.setNextWord(view.getRandomWord())
                 }
+                .subscribe()
     }
 }

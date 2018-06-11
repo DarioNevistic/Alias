@@ -22,8 +22,16 @@ import kotlinx.android.synthetic.main.dialog_get_ready.*
 import timber.log.Timber
 import java.util.*
 import android.view.animation.TranslateAnimation
-
-
+import android.support.v4.view.animation.FastOutSlowInInterpolator
+import android.view.Gravity
+import com.transitionseverywhere.Slide
+import com.transitionseverywhere.TransitionManager
+import kotlinx.android.synthetic.main.fragment_main_game.view.*
+import android.support.v4.view.animation.FastOutLinearInInterpolator
+import android.support.v4.view.animation.LinearOutSlowInInterpolator
+import com.transitionseverywhere.Fade
+import com.transitionseverywhere.TransitionSet
+import com.transitionseverywhere.extra.Scale
 
 
 /**
@@ -41,6 +49,9 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     private lateinit var countDownTimer: CountDownTimer
 
     private lateinit var words: MutableList<String>
+
+    lateinit var transitionsContainer: ViewGroup
+
 
     private var roundTime = 60
     private var numberOfCorrectAnswers = 0
@@ -65,14 +76,50 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
         loadWords()
         initDialog()
         presenter.onViewCreated()
+
+        transitionsContainer = view.findViewById(R.id.card_view) as ViewGroup
     }
 
-    fun slideToRight(view: View) {
-        val animate = TranslateAnimation(0f, view.width.toFloat(), 0f, 0f)
-        animate.duration = 500
-        animate.fillAfter = true
-        view.startAnimation(animate)
-        view.visibility = View.GONE
+    override fun slideToRight() {
+        TransitionManager.beginDelayedTransition(transitionsContainer, Slide(Gravity.END))
+        transitionsContainer.card_view.visibility = View.GONE
+
+       slideInCorrect()
+    }
+
+    override fun slideToLeft() {
+        TransitionManager.beginDelayedTransition(transitionsContainer, Slide(Gravity.START))
+        transitionsContainer.card_view.visibility = View.GONE
+
+        slideInWrong()
+    }
+
+    fun slideInWrong() {
+        Handler().postDelayed({
+            setNextWord(getRandomWord())
+            val set = TransitionSet()
+                    .addTransition(Scale(0.7f))
+                    .addTransition(Fade())
+                    .setInterpolator(FastOutLinearInInterpolator())
+
+            TransitionManager.beginDelayedTransition(transitionsContainer, set)
+            transitionsContainer.card_view.visibility = View.VISIBLE
+        }, 400)
+        // TODO Move these methods to appropriate place (refactor methods calls from presenter)
+    }
+
+    fun slideInCorrect() {
+        Handler().postDelayed({
+            setNextWord(getRandomWordDeleteOld())
+            val set = TransitionSet()
+                    .addTransition(Scale(0.7f))
+                    .addTransition(Fade())
+                    .setInterpolator(FastOutLinearInInterpolator())
+
+            TransitionManager.beginDelayedTransition(transitionsContainer, set)
+            transitionsContainer.card_view.visibility = View.VISIBLE
+        }, 400)
+
     }
 
     private fun initDialog() {

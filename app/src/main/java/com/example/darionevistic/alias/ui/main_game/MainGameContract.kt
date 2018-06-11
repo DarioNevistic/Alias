@@ -40,6 +40,10 @@ interface MainGameContract {
         fun getRandomWord(): String
 
         fun setNextWord(word: String)
+
+        fun slideToRight()
+
+        fun slideToLeft()
     }
 
     interface Presenter {
