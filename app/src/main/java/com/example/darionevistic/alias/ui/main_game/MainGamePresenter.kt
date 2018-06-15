@@ -5,6 +5,7 @@ import com.example.darionevistic.alias.database.entity.Team
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -55,21 +56,29 @@ class MainGamePresenter @Inject constructor(private val model: MainGameModel,
 
     override fun onCorrectAnswerPressed(): Disposable {
         return view.observeCorrectBtn()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .doOnNext {
                     Timber.d("Correct answer")
                     view.slideToRight()
                     view.onCorrectAnswer()
                 }
+                .doOnError { Timber.d("Errooooooor 1 ${it.localizedMessage}") }
                 .subscribe()
     }
 
     override fun onWrongAnswerPressed(): Disposable {
         return view.observeWrongBtn()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .doOnNext {
                     Timber.d("Wrong answer")
                     view.slideToLeft()
                     view.onWrongAnswer()
                 }
+                .doOnError { Timber.d("Errooooooor 2 ${it.localizedMessage}") }
                 .subscribe()
+    }
+
+    override fun storeTeamsToDB(teams: MutableList<Team>) {
+        model.storeTeamsInDB(teams)
     }
 }

@@ -3,6 +3,7 @@ package com.example.darionevistic.alias.database.entity
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import com.example.darionevistic.alias.mapper.WordModel
 
 /**
  * Created by dario.nevistic on 17/03/2018.
@@ -21,4 +22,7 @@ data class Team(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
+    @ColumnInfo(name = "team_words")
+    var teamWords: List<WordModel> = arrayListOf()
 }

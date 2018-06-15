@@ -25,6 +25,15 @@ class MainGameModel @Inject constructor(private val teamDao: TeamDao,
                 .doOnNext { Timber.d("Dispatching ${it.size} teams from DB...") }
     }
 
+    fun storeTeamsInDB(teams: MutableList<Team>) {
+        Observable.fromCallable { teamDao.insertTeams(teams) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe {
+                    Timber.d("Inserted ${teams.size} teams in DB...")
+                }
+    }
+
     fun getSettingsFromDB(): Flowable<List<SettingsData>> {
         return settingsDao.getAllSettings()
                 .subscribeOn(Schedulers.io())

@@ -2,36 +2,36 @@ package com.example.darionevistic.alias.ui.main_game
 
 import android.app.Dialog
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
+import android.support.v4.view.animation.FastOutLinearInInterpolator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.darionevistic.alias.R
-import com.example.darionevistic.alias.database.entity.Team
-import com.jakewharton.rxbinding2.view.RxView
-import dagger.android.support.DaggerFragment
-import io.reactivex.Observable
-import kotlinx.android.synthetic.main.fragment_main_game.*
-import javax.inject.Inject
-import android.os.CountDownTimer
-import android.os.Handler
 import com.example.darionevistic.alias.database.entity.SettingsData
+import com.example.darionevistic.alias.database.entity.Team
+import com.example.darionevistic.alias.mapper.WordModel
 import com.example.darionevistic.alias.ui.home.HomeActivity
-import kotlinx.android.synthetic.main.dialog_get_ready.*
-import timber.log.Timber
-import java.util.*
-import android.view.animation.TranslateAnimation
-import android.support.v4.view.animation.FastOutSlowInInterpolator
-import android.view.Gravity
+import com.jakewharton.rxbinding2.view.RxView
+import com.transitionseverywhere.Fade
 import com.transitionseverywhere.Slide
 import com.transitionseverywhere.TransitionManager
-import kotlinx.android.synthetic.main.fragment_main_game.view.*
-import android.support.v4.view.animation.FastOutLinearInInterpolator
-import android.support.v4.view.animation.LinearOutSlowInInterpolator
-import com.transitionseverywhere.Fade
 import com.transitionseverywhere.TransitionSet
 import com.transitionseverywhere.extra.Scale
+import dagger.android.support.DaggerFragment
+import io.reactivex.Observable
+import kotlinx.android.synthetic.main.dialog_get_ready.*
+import kotlinx.android.synthetic.main.fragment_main_game.*
+import kotlinx.android.synthetic.main.fragment_main_game.view.*
+import timber.log.Timber
+import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 /**
@@ -60,6 +60,10 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     private var roundNumber = 1
     private var pointsForVictory = 0
     private var allTeams: ArrayList<Team> = arrayListOf()
+    private var wordsList: ArrayList<WordModel> = arrayListOf()
+    private var currentWord: String = ""
+
+    private lateinit var mediaPlayer: MediaPlayer
 
     companion object {
         fun newInstance() =
@@ -73,6 +77,7 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         loadWords()
         initDialog()
         presenter.onViewCreated()
@@ -81,34 +86,45 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     }
 
     override fun slideToRight() {
-        TransitionManager.beginDelayedTransition(transitionsContainer, Slide(Gravity.END))
+        TransitionManager.beginDelayedTransition(transitionsContainer, Slide(Gravity.END).setDuration(200))
         transitionsContainer.card_view.visibility = View.GONE
 
-       slideInCorrect()
+        slideInCorrect()
     }
 
     override fun slideToLeft() {
-        TransitionManager.beginDelayedTransition(transitionsContainer, Slide(Gravity.START))
+        TransitionManager.beginDelayedTransition(transitionsContainer, Slide(Gravity.START).setDuration(200))
         transitionsContainer.card_view.visibility = View.GONE
 
         slideInWrong()
     }
 
-    fun slideInWrong() {
+    private fun slideInWrong() {
         Handler().postDelayed({
             setNextWord(getRandomWord())
             val set = TransitionSet()
                     .addTransition(Scale(0.7f))
                     .addTransition(Fade())
+                    .setDuration(200)
                     .setInterpolator(FastOutLinearInInterpolator())
 
             TransitionManager.beginDelayedTransition(transitionsContainer, set)
             transitionsContainer.card_view.visibility = View.VISIBLE
+            enableGameBtns()
         }, 400)
-        // TODO Move these methods to appropriate place (refactor methods calls from presenter)
     }
 
-    fun slideInCorrect() {
+    private fun enableGameBtns() {
+        correct_answer_btn.isEnabled = true
+        wrong_answer_btn.isEnabled = true
+    }
+
+    private fun disableGameBtns() {
+        correct_answer_btn.isEnabled = false
+        wrong_answer_btn.isEnabled = false
+    }
+
+    private fun slideInCorrect() {
         Handler().postDelayed({
             setNextWord(getRandomWordDeleteOld())
             val set = TransitionSet()
@@ -118,6 +134,7 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
 
             TransitionManager.beginDelayedTransition(transitionsContainer, set)
             transitionsContainer.card_view.visibility = View.VISIBLE
+            enableGameBtns()
         }, 400)
 
     }
@@ -141,9 +158,18 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
 
     override fun getRandomWordDeleteOld(): String {
         var randomWord = ""
-        words.first { in_game_word.text.toString() == it }.let { words.remove(it) }
 
-//        words.forEach { if (in_game_word.text.toString() == it) words.remove(it) }
+        for(i in 0 until words.size) {
+            if(in_game_word.text.toString() == words[i]) {
+                words.remove(words[i])
+                break
+            }
+        }
+
+
+
+//        words.firstOrNull { in_game_word.text.toString() == it}.let {words.remove(it)}
+
         if (words.size > 0) {
             Timber.d("Get random word size is greater than 0")
             randomWord = words[Random().nextInt(words.size)]
@@ -158,6 +184,7 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
 
     override fun setNextWord(word: String) {
         in_game_word.text = word
+        currentWord = word
     }
 
     override fun initTeamsAdapter(teams: ArrayList<Team>) {
@@ -193,20 +220,19 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     }
 
     private fun checkPointsForVictory() {
-        if (allTeams[teamPlaying].teamPoints >= pointsForVictory) {
-            gameEnd()
-        }
+        allTeams.forEach { it.teamPoints >= pointsForVictory }.let { gameEnd() }
     }
 
     private fun gameEnd() {
         Timber.d("Game end, victory team is: ${allTeams[teamPlaying].teamName}")
+        presenter.storeTeamsToDB(allTeams)
         startActivity(Intent(activity, HomeActivity::class.java))
         activity?.finish()
     }
 
     override fun roundEnd() {
         allTeams[teamPlaying].teamPoints = (allTeams[teamPlaying].teamPoints + numberOfCorrectAnswers)
-        checkPointsForVictory()
+        allTeams[teamPlaying].teamWords = wordsList
 
         teamPlaying++
         if (teamPlaying < (allTeams.size)) {
@@ -217,8 +243,10 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
             allTeams[allTeams.size - 1].isTeamPlaying = false
             allTeams[teamPlaying].isTeamPlaying = true
             updateRoundNumber()
+            checkPointsForVictory()
         }
 
+        wordsList = arrayListOf()
         resetNumberOfCorrectAnswers()
         teamsAdapter.updateTeams(allTeams)
         showStartDialog()
@@ -271,11 +299,30 @@ class MainGameFragment : DaggerFragment(), MainGameContract.View {
     }
 
     override fun onCorrectAnswer() {
+        stopPlaying()
+        mediaPlayer = MediaPlayer.create(activity, R.raw.success)
+        mediaPlayer.start()
+        disableGameBtns()
+        wordsList.add(WordModel(currentWord, true))
         numberOfCorrectAnswers += 1
         in_game_team_points.text = numberOfCorrectAnswers.toString()
     }
 
     override fun onWrongAnswer() {
+        stopPlaying()
+        mediaPlayer = MediaPlayer.create(activity, R.raw.error)
+        mediaPlayer.start()
+        disableGameBtns()
+        wordsList.add(WordModel(currentWord, false))
         numberOfWrongAnswers += 1
+    }
+
+    private fun stopPlaying() {
+        if(::mediaPlayer.isInitialized) {
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.stop()
+                mediaPlayer.release()
+            }
+        }
     }
 }

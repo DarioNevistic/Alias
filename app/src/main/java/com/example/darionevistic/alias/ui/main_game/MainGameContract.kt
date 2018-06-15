@@ -56,5 +56,7 @@ interface MainGameContract {
         fun onCorrectAnswerPressed(): Disposable
 
         fun onWrongAnswerPressed(): Disposable
+
+        fun storeTeamsToDB(teams: MutableList<Team>)
     }
 }
